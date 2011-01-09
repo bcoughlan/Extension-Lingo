@@ -84,7 +84,6 @@ function lingoParser(&$parser, &$text) {
 			$offset=$offsets[0][$i];
 			//Check if word is an abbreviation from the terminologies
 			if ( !is_numeric($offset[0]) && isset($terms[$offset[0]])) {	//Word matches, replace with appropriate span tag
-				echo $offset[0];
 				$changed = true;
 
 				$tip = htmlentities($terms[$offset[0]]);
