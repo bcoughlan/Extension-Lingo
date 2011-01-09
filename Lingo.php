@@ -56,10 +56,8 @@ function lingoParser(&$parser, &$text) {
 
 	//Get array of terms
 	$terms = getLingoArray($content);
-	//Get the keys (abbreviations) for faster searching
-	$abbr = array_keys($terms);
 	//Get the minimum length abbreviation so we don't bother checking against words shorter than that
-	$min = min(array_map('strlen', $abbr));
+	$min = min(array_map('strlen', array_keys($terms)));
 
 	//Parse HTML from page
 	$doc = new DOMDocument();
@@ -85,7 +83,8 @@ function lingoParser(&$parser, &$text) {
 		for ($i=$len-1; $i>=0; $i--) {
 			$offset=$offsets[0][$i];
 			//Check if word is an abbreviation from the terminologies
-			if ( in_array($offset[0], $abbr, true) ) {	//Word matches, replace with appropriate span tag
+			if ( !is_numeric($offset[0]) && isset($terms[$offset[0]])) {	//Word matches, replace with appropriate span tag
+				echo $offset[0];
 				$changed = true;
 
 				$tip = htmlentities($terms[$offset[0]]);
