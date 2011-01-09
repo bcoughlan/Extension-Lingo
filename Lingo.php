@@ -92,11 +92,11 @@ function lingoParser(&$parser, &$text) {
 				$afterMatchNode = $doc->createTextNode (substr($el->nodeValue,$offset[1]+strlen($offset[0]),strlen($el->nodeValue)-1));
 
 				//Wrap abbreviation in <span> tags
-				$span = $doc->createElement('span', $offset[0]);
+				$span = @$doc->createElement('span', $offset[0]);
 				$span->setAttribute('class', "tooltip_abbr");
 
 				//Wrap definition in <span> tags, hidden
-				$spanTip = $doc->createElement('span', $tip);
+				$spanTip = @$doc->createElement('span', $tip);
 				$spanTip->setAttribute('class', "tooltip_hide");
 
 				$el->parentNode->insertBefore($beforeMatchNode, $el);
