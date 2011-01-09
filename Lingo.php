@@ -31,7 +31,7 @@ function getLingoArray(&$content) {
 	$c = explode("\n", $content);
 
 	foreach ($c as $entry) {
-		if ($entry[0] !== ';') continue;
+		if (empty($entry) || $entry[0] !== ';') continue;
 
 		$terms = explode(':', $entry, 2);
 		if (count($terms) < 2) continue; //Invalid syntax
